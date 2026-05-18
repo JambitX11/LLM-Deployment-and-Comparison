@@ -58,7 +58,21 @@ pip install -r requirements.txt
 ```bash
 cd /mnt/data
 git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git
+```
+
+测试完 Qwen 后，如果空间不足，可以删除 Qwen，再下载 ChatGLM3：
+
+```bash
+rm -rf /mnt/data/Qwen-7B-Chat
+cd /mnt/data
 git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git
+```
+
+测试完 ChatGLM3 后，如果空间不足，可以删除 ChatGLM3，再下载 Baichuan：
+
+```bash
+rm -rf /mnt/data/chatglm3-6b
+cd /mnt/data
 git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
 ```
 
@@ -77,11 +91,11 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base.git
 
 ```bash
 bash scripts/install_deps_cpu.sh
-bash scripts/download_models.sh
+bash scripts/download_models.sh qwen
 bash scripts/run_all_tests.sh qwen
 ```
 
-其中 `qwen` 可以替换为 `chatglm3`、`baichuan` 或 `all`。CPU 环境建议先跑一个模型，确认流程正常后再继续。
+其中 `qwen` 可以替换为 `chatglm3` 或 `baichuan`。云平台空间有限时，推荐下载一个模型、测试一个模型、必要时删除后再下载下一个模型。
 
 Qwen 示例：
 

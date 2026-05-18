@@ -32,7 +32,6 @@ GitHub 项目链接：[https://github.com/JambitX11/LLM-Deployment-and-Compariso
 | ChatGLM3-6B | 6B | `/mnt/data/chatglm3-6b` | 常见中文对话模型，适合与 Qwen 对比。 |
 | Baichuan2-7B-Chat/Base | 7B | `/mnt/data/Baichuan2-7B-Chat` | 中文开源模型，可用于横向比较。 |
 
-说明：若 CPU 资源不足导致某个模型无法完整运行，需要在本节或第 8 节中如实说明。
 
 ## 4. 部署流程
 
@@ -40,7 +39,7 @@ GitHub 项目链接：[https://github.com/JambitX11/LLM-Deployment-and-Compariso
 
 在 ModelScope Notebook 中打开 Terminal，用于安装依赖、下载模型、克隆项目和运行测试脚本。
 
-【此处插入截图：Terminal 打开页面】
+![1779114464366](image/hw3_学号_姓名/start.png)
 
 ### 4.2 克隆 GitHub 项目
 
@@ -69,12 +68,26 @@ pip install -r requirements.txt
 
 ### 4.4 下载模型
 
-模型下载到 `/mnt/data/`，不提交到 GitHub：
+模型下载到 `/mnt/data/`，不提交到 GitHub。由于云平台磁盘空间有限，本实验采用单模型下载和测试的方式：先下载一个模型，完成测试并保存结果后，再视空间情况删除旧模型并下载下一个模型。
 
 ```bash
 cd /mnt/data
 git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git
+```
+
+测试完 Qwen 后，如果空间不足，删除 Qwen 并下载 ChatGLM3：
+
+```bash
+rm -rf /mnt/data/Qwen-7B-Chat
+cd /mnt/data
 git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git
+```
+
+测试完 ChatGLM3 后，如果空间不足，删除 ChatGLM3 并下载 Baichuan：
+
+```bash
+rm -rf /mnt/data/chatglm3-6b
+cd /mnt/data
 git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
 ```
 ![1779099606105](image/hw3_学号_姓名/gitQwen.png)
