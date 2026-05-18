@@ -17,7 +17,7 @@ bash scripts/run_all_tests.sh qwen
 
 云平台磁盘空间有限时，不建议一次下载三个模型。推荐先下载并测试一个模型，然后删除旧模型，再下载下一个模型。
 
-CPU 环境运行 7B 模型可能很慢，建议每次只跑一个模型，例如 `qwen`。批量测试输出会保存到 `results/raw_outputs/`。
+CPU 环境运行 7B 模型可能很慢，建议每次只跑一个模型，例如 `qwen`。批量测试脚本会从 `prompts/test_questions.json` 读取 5 个问题，单个模型只加载一次，然后按顺序生成结果。输出会保存到 `results/raw_outputs/`。
 
 ## 1. 克隆本项目命令
 
@@ -81,6 +81,14 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base.git
 
 ## 4. 运行 Qwen
 
+一次运行 Qwen 的 5 个测试问题：
+
+```bash
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128
+```
+
+单独运行一个问题：
+
 ```bash
 python scripts/run_qwen_cpu.py --prompt "请说出以下两句话区别在哪里？1、冬天：能穿多少穿多少 2、夏天：能穿多少穿多少"
 ```
@@ -93,6 +101,14 @@ python scripts/run_qwen_cpu.py --model_path /mnt/data/Qwen-7B-Chat --max_new_tok
 
 ## 5. 运行 ChatGLM3
 
+一次运行 ChatGLM3 的 5 个测试问题：
+
+```bash
+python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 128
+```
+
+单独运行一个问题：
+
 ```bash
 python scripts/run_chatglm3_cpu.py --prompt "他知道我知道你知道他不知道吗？这句话里，到底谁不知道？"
 ```
@@ -104,6 +120,14 @@ python scripts/run_chatglm3_cpu.py --model_path /mnt/data/chatglm3-6b --max_new_
 ```
 
 ## 6. 运行 Baichuan
+
+一次运行 Baichuan 的 5 个测试问题：
+
+```bash
+python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 128
+```
+
+单独运行一个问题：
 
 ```bash
 python scripts/run_baichuan_cpu.py --prompt "请解释下面对话中每个“意思”的不同含义：甲：你这是什么意思？乙：没什么意思，就是意思意思。甲：你这就不够意思了。乙：小意思，小意思。"

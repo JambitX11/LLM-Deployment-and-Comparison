@@ -51,20 +51,19 @@ git clone https://github.com/JambitX11/LLM-Deployment-and-Comparison.git
 cd LLM-Deployment-and-Comparison
 ```
 
-【此处插入截图：git clone 本 GitHub 仓库成功页面】
+![1779115818386](image/hw3_学号_姓名/clone.png)
 
 ### 4.3 安装依赖
 
-进入项目目录后，执行以下命令安装 CPU 版本 PyTorch 和项目依赖：
+进入项目目录后，使用仓库中提供的脚本安装 CPU 版本 PyTorch 和项目依赖：
 
 ```bash
-pip install -U pip setuptools wheel
-pip install torch==2.3.0+cpu torchvision==0.18.0+cpu --index-url https://download.pytorch.org/whl/cpu
-pip install -r requirements.txt
+bash scripts/install_deps_cpu.sh
 ```
-![1779101623202](image/hw3_学号_姓名/pip1.png)
 
-【此处插入截图：pip install 依赖成功页面】
+该脚本主要执行以下步骤：升级 `pip`、`setuptools`、`wheel`，安装 CPU 版本 `torch` 和 `torchvision`，再通过 `requirements.txt` 安装项目依赖。
+
+![1779116248259](image/hw3_学号_姓名/pip.png)
 
 ### 4.4 下载模型
 
@@ -96,16 +95,17 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
 
 ![1779100551210](image/hw3_学号_姓名/gitBaichuan.png)
 
-【此处插入截图：git clone 模型成功页面】
 
 ### 4.5 运行测试脚本
+
+5 个测试问题保存在 `prompts/test_questions.json`。批量测试脚本会读取该文件，单个模型只加载一次，然后按顺序生成 5 个问题的结果。
 
 示例：
 
 ```bash
-python scripts/run_qwen_cpu.py --prompt "请说出以下两句话区别在哪里？1、冬天：能穿多少穿多少 2、夏天：能穿多少穿多少"
-python scripts/run_chatglm3_cpu.py --prompt "他知道我知道你知道他不知道吗？这句话里，到底谁不知道？"
-python scripts/run_baichuan_cpu.py --prompt "请解释下面对话中每个“意思”的不同含义：甲：你这是什么意思？乙：没什么意思，就是意思意思。甲：你这就不够意思了。乙：小意思，小意思。"
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128
+python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 128
+python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 128
 ```
 
 ## 5. 测试问题设计

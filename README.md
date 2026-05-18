@@ -44,7 +44,8 @@ LLM-Deployment-and-Comparison/
 │   ├── run_chatglm3_cpu.py
 │   └── run_baichuan_cpu.py
 ├── prompts/
-│   └── test_questions.md
+│   ├── test_questions.md
+│   └── test_questions.json
 ├── results/
 │   ├── qwen_results.md
 │   ├── chatglm3_results.md
@@ -88,6 +89,12 @@ bash scripts/run_all_tests.sh qwen
 云平台磁盘空间有限时，不建议同时下载三个模型。推荐按“下载一个模型、测试一个模型、必要时删除该模型、再下载下一个模型”的顺序操作。
 
 下载脚本支持 `qwen`、`chatglm3`、`baichuan` 三种常用参数；批量测试脚本也建议按单模型参数运行。输出会保存到 `results/raw_outputs/`。
+
+批量测试脚本会从 `prompts/test_questions.json` 读取 5 个测试问题。单个模型只加载一次，然后按顺序回答 5 个问题：
+
+```bash
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128
+```
 
 ## 模型下载命令
 
@@ -138,7 +145,7 @@ python scripts/run_qwen_cpu.py --max_new_tokens 128 --prompt "明明明明明白
 
 ## 测试问题说明
 
-统一测试问题放在 [prompts/test_questions.md](prompts/test_questions.md)。每个模型都应尽量回答同一组问题，便于横向比较。
+统一测试问题说明放在 [prompts/test_questions.md](prompts/test_questions.md)，脚本实际读取的提示词文件是 [prompts/test_questions.json](prompts/test_questions.json)。每个模型都应尽量回答同一组问题，便于横向比较。
 
 测试重点包括：
 
