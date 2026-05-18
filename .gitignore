@@ -1,0 +1,60 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Notebook cache
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local environment files
+.env
+.env.*
+
+# Model weights and large model artifacts
+*.bin
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.gguf
+*.onnx
+*.tflite
+*.msgpack
+*.h5
+pytorch_model*.bin
+model*.safetensors
+adapter_model*.bin
+adapter_model*.safetensors
+
+# Large model directories if someone accidentally copies them into this repo
+Qwen-7B-Chat/
+chatglm3-6b/
+Baichuan2-7B-Chat/
+Baichuan2-7B-Base/
+models/
+model/
+weights/
+checkpoints/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Keep report, results, prompts, and screenshots placeholders trackable.
+# Do not ignore screenshots/ as a whole; final screenshots can be committed when needed.
+screenshots/*.tmp
+screenshots/*.temp
