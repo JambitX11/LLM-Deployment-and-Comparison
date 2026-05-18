@@ -19,11 +19,11 @@
 
 ## 3. 在 `/mnt/workspace` 克隆 GitHub 仓库
 
-把下面命令中的 `你的用户名` 替换为自己的 GitHub 用户名。
+以下命令使用本作业的 GitHub 仓库地址。
 
 ```bash
 cd /mnt/workspace
-git clone https://github.com/你的用户名/LLM-Deployment-and-Comparison.git
+git clone https://github.com/JambitX11/LLM-Deployment-and-Comparison.git
 cd LLM-Deployment-and-Comparison
 ```
 
@@ -72,6 +72,16 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base.git
 建议截图：模型 `git clone` 成功页面。
 
 ## 6. 运行测试脚本
+
+如果不想逐条复制命令，可以直接使用仓库中的批量脚本：
+
+```bash
+bash scripts/install_deps_cpu.sh
+bash scripts/download_models.sh
+bash scripts/run_all_tests.sh qwen
+```
+
+其中 `qwen` 可以替换为 `chatglm3`、`baichuan` 或 `all`。CPU 环境建议先跑一个模型，确认流程正常后再继续。
 
 Qwen 示例：
 

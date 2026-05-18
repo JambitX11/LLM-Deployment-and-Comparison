@@ -2,6 +2,27 @@
 
 以下命令主要用于 ModelScope Notebook 的 Terminal。
 
+## 最省事的运行方式
+
+克隆项目后，后续可以直接运行脚本，不需要一条条复制安装和测试命令。
+
+```bash
+cd /mnt/workspace
+git clone https://github.com/JambitX11/LLM-Deployment-and-Comparison.git
+cd LLM-Deployment-and-Comparison
+bash scripts/install_deps_cpu.sh
+bash scripts/download_models.sh
+bash scripts/run_all_tests.sh qwen
+```
+
+如果想一次运行三个模型的全部问题：
+
+```bash
+bash scripts/run_all_tests.sh all
+```
+
+CPU 环境运行 7B 模型可能很慢，建议先只跑一个模型，例如 `qwen`。批量测试输出会保存到 `results/raw_outputs/`。
+
 ## 1. 克隆本项目命令
 
 ```bash
@@ -25,6 +46,12 @@ cd /mnt/data
 git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git
 git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git
 git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
+```
+
+也可以直接运行：
+
+```bash
+bash scripts/download_models.sh
 ```
 
 可选 Baichuan Base 模型：

@@ -66,13 +66,26 @@ LLM-Deployment-and-Comparison/
 
 ```bash
 cd /mnt/workspace
-git clone https://github.com/你的用户名/LLM-Deployment-and-Comparison.git
+git clone https://github.com/JambitX11/LLM-Deployment-and-Comparison.git
 cd LLM-Deployment-and-Comparison
 
 pip install -U pip setuptools wheel
 pip install torch==2.3.0+cpu torchvision==0.18.0+cpu --index-url https://download.pytorch.org/whl/cpu
 pip install -r requirements.txt
 ```
+
+也可以使用脚本：
+
+```bash
+cd /mnt/workspace
+git clone https://github.com/JambitX11/LLM-Deployment-and-Comparison.git
+cd LLM-Deployment-and-Comparison
+bash scripts/install_deps_cpu.sh
+bash scripts/download_models.sh
+bash scripts/run_all_tests.sh qwen
+```
+
+批量测试脚本支持 `qwen`、`chatglm3`、`baichuan`、`all` 四种参数，输出会保存到 `results/raw_outputs/`。
 
 ## 模型下载命令
 
