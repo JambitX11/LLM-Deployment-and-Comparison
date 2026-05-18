@@ -2,6 +2,7 @@
 set -euo pipefail
 
 MODEL_DIR="${MODEL_DIR:-/mnt/data}"
+MODEL="${1:-qwen}"
 mkdir -p "$MODEL_DIR"
 cd "$MODEL_DIR"
 
@@ -17,8 +18,26 @@ clone_if_missing() {
   fi
 }
 
-clone_if_missing "Qwen-7B-Chat" "https://www.modelscope.cn/qwen/Qwen-7B-Chat.git"
-clone_if_missing "chatglm3-6b" "https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git"
-clone_if_missing "Baichuan2-7B-Chat" "https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git"
+case "$MODEL" in
+  qwen)
+    clone_if_missing "Qwen-7B-Chat" "https://www.modelscope.cn/qwen/Qwen-7B-Chat.git"
+    ;;
+  chatglm3)
+    clone_if_missing "chatglm3-6b" "https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git"
+    ;;
+  baichuan)
+    clone_if_missing "Baichuan2-7B-Chat" "https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git"
+    ;;
+  all)
+    echo "[WARN] Downloading all models requires a lot of disk space."
+    clone_if_missing "Qwen-7B-Chat" "https://www.modelscope.cn/qwen/Qwen-7B-Chat.git"
+    clone_if_missing "chatglm3-6b" "https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git"
+    clone_if_missing "Baichuan2-7B-Chat" "https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git"
+    ;;
+  *)
+    echo "Usage: bash scripts/download_models.sh [qwen|chatglm3|baichuan|all]" >&2
+    exit 1
+    ;;
+esac
 
 echo "Done. Models are under $MODEL_DIR"
