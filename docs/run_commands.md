@@ -11,17 +11,13 @@ cd /mnt/workspace
 git clone https://github.com/JambitX11/LLM-Deployment-and-Comparison.git
 cd LLM-Deployment-and-Comparison
 bash scripts/install_deps_cpu.sh
-bash scripts/download_models.sh
+bash scripts/download_models.sh qwen
 bash scripts/run_all_tests.sh qwen
 ```
 
-如果想一次运行三个模型的全部问题：
+云平台磁盘空间有限时，不建议一次下载三个模型。推荐先下载并测试一个模型，然后删除旧模型，再下载下一个模型。
 
-```bash
-bash scripts/run_all_tests.sh all
-```
-
-CPU 环境运行 7B 模型可能很慢，建议先只跑一个模型，例如 `qwen`。批量测试输出会保存到 `results/raw_outputs/`。
+CPU 环境运行 7B 模型可能很慢，建议每次只跑一个模型，例如 `qwen`。批量测试输出会保存到 `results/raw_outputs/`。
 
 ## 1. 克隆本项目命令
 
@@ -44,14 +40,36 @@ pip install -r requirements.txt
 ```bash
 cd /mnt/data
 git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git
+```
+
+ChatGLM3 单独下载：
+
+```bash
+cd /mnt/data
 git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git
+```
+
+Baichuan 单独下载：
+
+```bash
+cd /mnt/data
 git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
 ```
 
 也可以直接运行：
 
 ```bash
-bash scripts/download_models.sh
+bash scripts/download_models.sh qwen
+bash scripts/download_models.sh chatglm3
+bash scripts/download_models.sh baichuan
+```
+
+空间不足时，测试完一个模型后可以删除它再下载下一个：
+
+```bash
+rm -rf /mnt/data/Qwen-7B-Chat
+rm -rf /mnt/data/chatglm3-6b
+rm -rf /mnt/data/Baichuan2-7B-Chat
 ```
 
 可选 Baichuan Base 模型：

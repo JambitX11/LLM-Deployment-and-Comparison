@@ -81,11 +81,13 @@ cd /mnt/workspace
 git clone https://github.com/JambitX11/LLM-Deployment-and-Comparison.git
 cd LLM-Deployment-and-Comparison
 bash scripts/install_deps_cpu.sh
-bash scripts/download_models.sh
+bash scripts/download_models.sh qwen
 bash scripts/run_all_tests.sh qwen
 ```
 
-批量测试脚本支持 `qwen`、`chatglm3`、`baichuan`、`all` 四种参数，输出会保存到 `results/raw_outputs/`。
+云平台磁盘空间有限时，不建议同时下载三个模型。推荐按“下载一个模型、测试一个模型、必要时删除该模型、再下载下一个模型”的顺序操作。
+
+下载脚本支持 `qwen`、`chatglm3`、`baichuan` 三种常用参数；批量测试脚本也建议按单模型参数运行。输出会保存到 `results/raw_outputs/`。
 
 ## 模型下载命令
 
@@ -94,7 +96,21 @@ bash scripts/run_all_tests.sh qwen
 ```bash
 cd /mnt/data
 git clone https://www.modelscope.cn/qwen/Qwen-7B-Chat.git
+```
+
+测试完 Qwen 后，如果空间不足，可以先删除该模型，再下载 ChatGLM3：
+
+```bash
+rm -rf /mnt/data/Qwen-7B-Chat
+cd /mnt/data
 git clone https://www.modelscope.cn/ZhipuAI/chatglm3-6b.git
+```
+
+测试完 ChatGLM3 后，如果空间不足，可以删除该模型，再下载 Baichuan：
+
+```bash
+rm -rf /mnt/data/chatglm3-6b
+cd /mnt/data
 git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
 ```
 
