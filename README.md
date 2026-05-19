@@ -86,7 +86,7 @@ LLM-Deployment-and-Comparison/
 
 ```bash
 python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256 --dtype auto --num_threads 4
-python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 300 --dtype auto --num_threads 8
+python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 256 --dtype auto --num_threads 4
 python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 256 --dtype auto --num_threads 4
 ```
 
