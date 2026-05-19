@@ -9,15 +9,33 @@ DEFAULT_MODEL_PATH = "/mnt/data/Baichuan2-7B-Chat"
 MODEL_NAME = "Baichuan2-7B"
 
 
+def parse_dtype(dtype):
+    if dtype == "auto":
+        return "auto"
+    if dtype == "float16":
+        return torch.float16
+    if dtype == "bfloat16":
+        return torch.bfloat16
+    if dtype == "float32":
+        return torch.float32
+    raise ValueError(f"Unsupported dtype: {dtype}")
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Run Baichuan2-7B on CPU.")
     parser.add_argument("--model_path", default=DEFAULT_MODEL_PATH, help="Local model directory.")
     parser.add_argument("--prompt", required=True, help="Input question or instruction.")
     parser.add_argument("--max_new_tokens", type=int, default=256, help="Maximum generated tokens.")
+    parser.add_argument(
+        "--dtype",
+        choices=["auto", "float16", "bfloat16", "float32"],
+        default="auto",
+        help="Model dtype. Use auto to avoid forcing 7B weights to float32 on CPU.",
+    )
     return parser.parse_args()
 
 
-def load_model(model_path):
+def load_model(model_path, dtype="auto"):
     tokenizer = AutoTokenizer.from_pretrained(
         model_path,
         trust_remote_code=True,
@@ -26,8 +44,9 @@ def load_model(model_path):
     model = AutoModelForCausalLM.from_pretrained(
         model_path,
         trust_remote_code=True,
-        torch_dtype=torch.float32,
+        torch_dtype=parse_dtype(dtype),
         device_map="cpu",
+        low_cpu_mem_usage=True,
     )
     model.eval()
     return tokenizer, model
@@ -61,7 +80,7 @@ def generate_answer(tokenizer, model, prompt, max_new_tokens):
 def main():
     args = parse_args()
     try:
-        tokenizer, model = load_model(args.model_path)
+        tokenizer, model = load_model(args.model_path, dtype=args.dtype)
         answer = generate_answer(tokenizer, model, args.prompt, args.max_new_tokens)
     except FileNotFoundError:
         print(f"[ERROR] Model path not found: {args.model_path}", file=sys.stderr)

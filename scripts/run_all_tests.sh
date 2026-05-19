@@ -5,12 +5,14 @@ cd "$(dirname "$0")/.."
 
 MODEL="${1:-qwen}"
 MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-128}"
+DTYPE="${DTYPE:-auto}"
 
 case "$MODEL" in
   qwen|chatglm3|baichuan)
     python scripts/run_questions_cpu.py \
       --model "$MODEL" \
-      --max_new_tokens "$MAX_NEW_TOKENS"
+      --max_new_tokens "$MAX_NEW_TOKENS" \
+      --dtype "$DTYPE"
     ;;
   *)
     echo "Usage: bash scripts/run_all_tests.sh [qwen|chatglm3|baichuan]" >&2

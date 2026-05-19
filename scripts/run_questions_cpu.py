@@ -40,6 +40,12 @@ def parse_args():
     parser.add_argument("--questions", default="prompts/test_questions.json")
     parser.add_argument("--output", default=None, help="Markdown output file.")
     parser.add_argument("--max_new_tokens", type=int, default=128)
+    parser.add_argument(
+        "--dtype",
+        choices=["auto", "float16", "bfloat16", "float32"],
+        default="auto",
+        help="Model dtype. Use auto to avoid forcing 7B weights to float32 on CPU.",
+    )
     parser.add_argument("--limit", type=int, default=None, help="Run only the first N questions.")
     return parser.parse_args()
 
@@ -80,7 +86,7 @@ def main():
     print("[INFO] This may take several minutes on CPU.")
 
     try:
-        tokenizer, model = config["load_model"](model_path)
+        tokenizer, model = config["load_model"](model_path, dtype=args.dtype)
     except Exception as exc:
         print(f"[ERROR] Failed to load model: {exc}", file=sys.stderr)
         print("Check whether the model has been downloaded to /mnt/data and whether memory is enough.", file=sys.stderr)

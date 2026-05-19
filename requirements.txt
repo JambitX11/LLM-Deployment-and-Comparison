@@ -4,7 +4,7 @@ pydantic==1.10.13
 sentencepiece
 tiktoken
 einops
-transformers_stream_generator
+transformers_stream_generator==0.0.4
 accelerate
 uvicorn
 fastapi

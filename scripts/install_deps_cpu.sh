@@ -12,5 +12,10 @@ pip install torch==2.3.0+cpu torchvision==0.18.0+cpu --index-url https://downloa
 echo "[3/3] Install project requirements"
 pip install -r requirements.txt
 
+echo "Ensure Qwen-compatible transformer packages"
+pip install --force-reinstall transformers==4.33.3 transformers_stream_generator==0.0.4 pydantic==1.10.13
+
 echo "Done. Current torch version:"
 python -c "import torch; print(torch.__version__)"
+echo "Current transformers version:"
+python -c "import transformers; print(transformers.__version__)"

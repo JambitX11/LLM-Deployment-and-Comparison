@@ -35,6 +35,18 @@ pip install torch==2.3.0+cpu torchvision==0.18.0+cpu --index-url https://downloa
 pip install -r requirements.txt
 ```
 
+如果 Qwen 报错 `cannot import name 'DisjunctiveConstraint' from 'transformers'`，说明 `transformers` 和 `transformers_stream_generator` 版本不兼容。重新执行依赖脚本：
+
+```bash
+bash scripts/install_deps_cpu.sh
+```
+
+检查版本：
+
+```bash
+python -c "import transformers, transformers_stream_generator; print(transformers.__version__)"
+```
+
 ## 3. 下载模型命令
 
 ```bash
@@ -85,6 +97,12 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base.git
 
 ```bash
 python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128
+```
+
+如果内存压力较大，先只跑第 1 个问题验证流程：
+
+```bash
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 64 --limit 1 --dtype auto
 ```
 
 单独运行一个问题：

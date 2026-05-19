@@ -49,6 +49,12 @@ pip install torch==2.3.0+cpu torchvision==0.18.0+cpu --index-url https://downloa
 pip install -r requirements.txt
 ```
 
+如果 Qwen 报错 `cannot import name 'DisjunctiveConstraint' from 'transformers'`，说明依赖版本不兼容，重新执行：
+
+```bash
+bash scripts/install_deps_cpu.sh
+```
+
 建议截图：`pip install` 成功页面。
 
 ## 5. 在 `/mnt/data` 下载模型
