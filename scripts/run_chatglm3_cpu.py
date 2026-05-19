@@ -64,7 +64,7 @@ def load_model(model_path, dtype="auto"):
     return tokenizer, model
 
 
-def generate_answer(tokenizer, model, prompt, max_new_tokens):
+def generate_answer(tokenizer, model, prompt, max_new_tokens, stream=False):
     # ChatGLM3 usually provides model.chat(tokenizer, prompt, history=[]).
     # ChatGLM3's chat() uses max_length rather than max_new_tokens in many
     # releases. Passing both triggers a transformers warning and may leave the
@@ -75,12 +75,34 @@ def generate_answer(tokenizer, model, prompt, max_new_tokens):
         except Exception:
             input_length = 128
         max_length = input_length + max_new_tokens
+
+        if stream and hasattr(model, "stream_chat"):
+            final_response = ""
+            for response, _ in model.stream_chat(
+                tokenizer,
+                prompt,
+                history=[],
+                max_length=max_length,
+                do_sample=True,
+                temperature=0.8,
+                top_p=0.8,
+            ):
+                if response.startswith(final_response):
+                    print(response[len(final_response) :], end="", flush=True)
+                else:
+                    print(response, end="", flush=True)
+                final_response = response
+            print()
+            return final_response
+
         response, _ = model.chat(
             tokenizer,
             prompt,
             history=[],
             max_length=max_length,
-            do_sample=False,
+            do_sample=True,
+            temperature=0.8,
+            top_p=0.8,
         )
         return response
 
