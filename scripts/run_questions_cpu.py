@@ -55,6 +55,11 @@ def parse_args():
         default=None,
         help="Set torch CPU thread count. Try 2, 4, or 8 depending on the Notebook CPU.",
     )
+    parser.add_argument(
+        "--stream",
+        action="store_true",
+        help="Stream partial output when the selected model supports it. Qwen supports this in many releases.",
+    )
     parser.add_argument("--limit", type=int, default=None, help="Run only the first N questions.")
     return parser.parse_args()
 
@@ -140,7 +145,16 @@ def main():
 
             try:
                 generation_started = time.perf_counter()
-                answer = config["generate_answer"](tokenizer, model, prompt, args.max_new_tokens)
+                try:
+                    answer = config["generate_answer"](
+                        tokenizer,
+                        model,
+                        prompt,
+                        args.max_new_tokens,
+                        stream=args.stream,
+                    )
+                except TypeError:
+                    answer = config["generate_answer"](tokenizer, model, prompt, args.max_new_tokens)
                 generation_seconds = time.perf_counter() - generation_started
             except Exception as exc:
                 generation_seconds = time.perf_counter() - generation_started

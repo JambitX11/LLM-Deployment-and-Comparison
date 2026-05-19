@@ -51,9 +51,27 @@ def load_model(model_path, dtype="auto"):
     return tokenizer, model
 
 
-def generate_answer(tokenizer, model, prompt, max_new_tokens):
+def generate_answer(tokenizer, model, prompt, max_new_tokens, stream=False):
     # Qwen-7B-Chat normally provides model.chat(). If the API changes, fall back
     # to the standard causal language model generate() interface.
+    if stream and hasattr(model, "chat_stream"):
+        previous = ""
+        final_response = ""
+        for response in model.chat_stream(
+            tokenizer,
+            prompt,
+            history=None,
+            max_new_tokens=max_new_tokens,
+        ):
+            final_response = response
+            if response.startswith(previous):
+                print(response[len(previous) :], end="", flush=True)
+            else:
+                print(response, end="", flush=True)
+            previous = response
+        print()
+        return final_response
+
     if hasattr(model, "chat"):
         response, _ = model.chat(
             tokenizer,
