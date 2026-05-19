@@ -66,13 +66,21 @@ def load_model(model_path, dtype="auto"):
 
 def generate_answer(tokenizer, model, prompt, max_new_tokens):
     # ChatGLM3 usually provides model.chat(tokenizer, prompt, history=[]).
-    # If the model README changes, this call may need small adjustments.
+    # ChatGLM3's chat() uses max_length rather than max_new_tokens in many
+    # releases. Passing both triggers a transformers warning and may leave the
+    # default max_length=8192, which is unnecessary for short homework answers.
     if hasattr(model, "chat"):
+        try:
+            input_length = len(tokenizer(prompt, add_special_tokens=True)["input_ids"])
+        except Exception:
+            input_length = 128
+        max_length = input_length + max_new_tokens
         response, _ = model.chat(
             tokenizer,
             prompt,
             history=[],
-            max_new_tokens=max_new_tokens,
+            max_length=max_length,
+            do_sample=False,
         )
         return response
 
