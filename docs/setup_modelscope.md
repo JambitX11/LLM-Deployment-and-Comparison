@@ -144,7 +144,7 @@ python scripts/run_qwen_cpu.py --max_new_tokens 128 --prompt "请说出以下两
 1. 将 Terminal 中的模型输出复制到 `results/` 对应文件。
 2. 将截图保存到 `screenshots/`。
 3. 将对比分析填写到 `results/comparison_table.md`。
-4. 将最终报告填写到 `report/hw3_学号_姓名.md`，并把文件名改成自己的学号和姓名。
+4. 将最终报告整理到 `report/实验报告.md`。
 5. 把更新后的 `results/`、`screenshots/`、`report/` 提交到 GitHub。
 
 提交示例：

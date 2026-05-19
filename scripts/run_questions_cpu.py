@@ -174,8 +174,6 @@ def main():
             file.write(f"```text\n{prompt}\n```\n\n")
             file.write("### 模型输出\n\n")
             file.write(f"```text\n{answer}\n```\n\n")
-            file.write("### 简短分析\n\n")
-            file.write("待填写。\n\n")
             file.flush()
 
         file.write("## 耗时汇总\n\n")
