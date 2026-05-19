@@ -105,6 +105,14 @@ python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256
 python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128 --limit 1 --dtype auto
 ```
 
+记录耗时和尝试降低精度：
+
+```bash
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256 --dtype bfloat16 --num_threads 4
+```
+
+说明：结果 Markdown 会记录模型加载耗时、每题生成耗时和总耗时。CPU 上 `bfloat16` 或 `float16` 不一定更快；如果速度变慢或报错，改回 `--dtype auto`。
+
 单独运行一个问题：
 
 ```bash
@@ -125,6 +133,12 @@ python scripts/run_qwen_cpu.py --model_path /mnt/data/Qwen-7B-Chat --max_new_tok
 python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 256
 ```
 
+带耗时记录和线程设置：
+
+```bash
+python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 256 --dtype auto --num_threads 4
+```
+
 单独运行一个问题：
 
 ```bash
@@ -143,6 +157,12 @@ python scripts/run_chatglm3_cpu.py --model_path /mnt/data/chatglm3-6b --max_new_
 
 ```bash
 python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 256
+```
+
+带耗时记录和线程设置：
+
+```bash
+python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 256 --dtype auto --num_threads 4
 ```
 
 单独运行一个问题：

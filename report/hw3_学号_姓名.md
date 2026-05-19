@@ -99,6 +99,7 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
 ### 4.5 运行测试脚本
 
 5 个测试问题保存在 `prompts/test_questions.json`。批量测试脚本会读取该文件，单个模型只加载一次，然后按顺序生成 5 个问题的结果。
+脚本会自动在 `results/raw_outputs/` 的 Markdown 文件中记录模型加载耗时、每题生成耗时和总耗时，便于后续写入报告。
 
 示例：
 

@@ -105,6 +105,14 @@ bash scripts/run_all_tests.sh qwen
 
 5 个测试问题保存在 `prompts/test_questions.json`。批量测试脚本会读取这个文件，单个模型只加载一次，然后按顺序输出 5 个问题的结果，并保存到 `results/raw_outputs/` 下的 Markdown 文件。
 
+结果 Markdown 会自动记录模型加载耗时、每题生成耗时和总耗时。若需要尝试降低精度或调整 CPU 线程数，可以使用：
+
+```bash
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 300 --dtype bfloat16 --num_threads 4
+```
+
+CPU 环境中 `bfloat16` 或 `float16` 不一定更快。如果运行失败或更慢，改回 `--dtype auto`。
+
 Qwen 示例：
 
 ```bash

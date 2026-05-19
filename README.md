@@ -102,6 +102,14 @@ python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256
 python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128 --limit 1 --dtype auto
 ```
 
+批量脚本会在 `results/raw_outputs/` 的 Markdown 文件中记录模型加载耗时、每题生成耗时和总耗时。若想尝试降低精度或调整 CPU 线程数，可以使用：
+
+```bash
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256 --dtype bfloat16 --num_threads 4
+```
+
+CPU 上 `bfloat16` 或 `float16` 不一定更快；如果速度变慢或报错，改回 `--dtype auto`。
+
 如果 Qwen 报错 `cannot import name 'DisjunctiveConstraint' from 'transformers'`，重新执行 `bash scripts/install_deps_cpu.sh` 修复依赖版本。
 
 ## 模型下载命令
