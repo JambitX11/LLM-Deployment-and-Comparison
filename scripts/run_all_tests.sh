@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 MODEL="${1:-qwen}"
-MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-128}"
+MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-256}"
 DTYPE="${DTYPE:-auto}"
 
 case "$MODEL" in

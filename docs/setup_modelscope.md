@@ -103,7 +103,7 @@ bash scripts/run_all_tests.sh qwen
 
 其中 `qwen` 可以替换为 `chatglm3` 或 `baichuan`。云平台空间有限时，推荐下载一个模型、测试一个模型、必要时删除后再下载下一个模型。
 
-5 个测试问题保存在 `prompts/test_questions.json`。批量测试脚本会读取这个文件，单个模型只加载一次，然后按顺序输出 5 个问题的结果。
+5 个测试问题保存在 `prompts/test_questions.json`。批量测试脚本会读取这个文件，单个模型只加载一次，然后按顺序输出 5 个问题的结果，并保存到 `results/raw_outputs/` 下的 Markdown 文件。
 
 Qwen 示例：
 

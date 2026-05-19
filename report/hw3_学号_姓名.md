@@ -103,9 +103,9 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Chat.git
 示例：
 
 ```bash
-python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128
-python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 128
-python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 128
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256
+python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 256
+python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 256
 ```
 
 ## 5. 测试问题设计

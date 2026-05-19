@@ -96,13 +96,13 @@ git clone https://www.modelscope.cn/baichuan-inc/Baichuan2-7B-Base.git
 一次运行 Qwen 的 5 个测试问题：
 
 ```bash
-python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256
 ```
 
 如果内存压力较大，先只跑第 1 个问题验证流程：
 
 ```bash
-python scripts/run_questions_cpu.py --model qwen --max_new_tokens 64 --limit 1 --dtype auto
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128 --limit 1 --dtype auto
 ```
 
 单独运行一个问题：
@@ -122,7 +122,7 @@ python scripts/run_qwen_cpu.py --model_path /mnt/data/Qwen-7B-Chat --max_new_tok
 一次运行 ChatGLM3 的 5 个测试问题：
 
 ```bash
-python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 128
+python scripts/run_questions_cpu.py --model chatglm3 --max_new_tokens 256
 ```
 
 单独运行一个问题：
@@ -142,7 +142,7 @@ python scripts/run_chatglm3_cpu.py --model_path /mnt/data/chatglm3-6b --max_new_
 一次运行 Baichuan 的 5 个测试问题：
 
 ```bash
-python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 128
+python scripts/run_questions_cpu.py --model baichuan --max_new_tokens 256
 ```
 
 单独运行一个问题：

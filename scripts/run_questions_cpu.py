@@ -39,7 +39,7 @@ def parse_args():
     parser.add_argument("--model_path", default=None, help="Local model directory.")
     parser.add_argument("--questions", default="prompts/test_questions.json")
     parser.add_argument("--output", default=None, help="Markdown output file.")
-    parser.add_argument("--max_new_tokens", type=int, default=128)
+    parser.add_argument("--max_new_tokens", type=int, default=256)
     parser.add_argument(
         "--dtype",
         choices=["auto", "float16", "bfloat16", "float32"],

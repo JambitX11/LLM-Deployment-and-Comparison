@@ -93,13 +93,13 @@ bash scripts/run_all_tests.sh qwen
 批量测试脚本会从 `prompts/test_questions.json` 读取 5 个测试问题。单个模型只加载一次，然后按顺序回答 5 个问题：
 
 ```bash
-python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 256
 ```
 
 若云平台内存紧张，可以先只跑一个问题验证流程：
 
 ```bash
-python scripts/run_questions_cpu.py --model qwen --max_new_tokens 64 --limit 1 --dtype auto
+python scripts/run_questions_cpu.py --model qwen --max_new_tokens 128 --limit 1 --dtype auto
 ```
 
 如果 Qwen 报错 `cannot import name 'DisjunctiveConstraint' from 'transformers'`，重新执行 `bash scripts/install_deps_cpu.sh` 修复依赖版本。
