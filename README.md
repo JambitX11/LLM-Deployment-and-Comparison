@@ -4,7 +4,7 @@
 学号：2450333  
 课程：人工智能导论  
 实验报告：[report/实验报告.md](report/实验报告.md)    
-GitHub 项目链接：[https://github.com/JambitX11/LLM-Deployment-and-Comparison](https://github.com/JambitX11/LLM-Deployment-and-Comparison)
+GitHub 项目链接：[https://github.com/Jambity11/LLM-Deployment-and-Comparison](https://github.com/Jambity11/LLM-Deployment-and-Comparison)
 
 
 本仓库用于完成《人工智能导论》第三次作业：在 ModelScope/魔搭平台上部署并测试开源大语言模型，并对不同模型在中文问答任务中的表现进行横向比较。本实验测试了 Qwen-7B-Chat、ChatGLM3-6B 和 Baichuan2-7B-Chat 三个模型，重点观察它们在中文表达、语义歧义理解、多层逻辑推理、指代关系理解和一词多义理解方面的差异。
